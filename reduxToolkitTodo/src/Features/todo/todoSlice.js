@@ -19,7 +19,7 @@ export const todoSlice = createSlice(
                     id: nanoid(),
                     text: action.payload
                 }
-                if(todo == ""){
+                if(todo.text === ""){
                     alert("Pls Add something")
                 }
                 else{

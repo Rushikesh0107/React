@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {removeTodo} from '../Features/todo/todoSlice'
+import {updateTodo} from '../Features/todo/todoSlice'
 
 function Todo() {
 
@@ -16,7 +17,15 @@ function Todo() {
                 className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
                 key={todo.id}
               >
-                <div className='text-white'>{todo.text}</div>
+                <div className='text-white w-9/12'>{todo.text}</div>
+
+                <button 
+                className='text-white bg-green-500 py-1 rounded-lg px-2 font-bold'
+                onClick={()=> dispatch(updateTodo(todo.id))}
+                >
+                  Update
+                </button>
+
                 <button
                  onClick={() => dispatch(removeTodo(todo.id))}
                   className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
