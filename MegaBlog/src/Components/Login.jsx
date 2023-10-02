@@ -14,7 +14,7 @@ function Login() {
     const {error, setError} = useState('')
 
     const login = async(data) => {
-        setError("")
+        //setError("")
         try {
             const session = await authService.login(data)
             if(session) {
@@ -73,7 +73,7 @@ function Login() {
                 <Button
                 type="submit"
                 className='w-full'
-                ></Button>
+                >Login</Button>
             </div>
         </form>
         </div>

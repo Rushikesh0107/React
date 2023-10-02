@@ -1,20 +1,20 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import appwriteService from '../appwrite/conf'
 import {Container, PostCard} from '../Components'
 
 
 function Home() {
 
-    consy [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([])
 
     useEffect(()=>{
-        appwriteService.getPost().then((post)=>{
-            setPosts(post.document)
+        appwriteService.getPosts().then((post)=>{
+            setPosts(post.documents)
         })
     }, [])
     
-  if(post.length === 0){
+  if(posts.length === 0){
     return (
         <div className='w-full py-8 mt-4 text-center'>
             <Container>
