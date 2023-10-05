@@ -1,14 +1,16 @@
-import './App.css'
-import BasketProduct from './components/BasketProduct'
-import NavBar from './components/NavBar'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom' 
+import Home from './pages/Home'
+import Basket from './pages/Basket'
 
 function App() {
 
   return (
-    <>
-    <NavBar />
-    <BasketProduct />
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/basket' element={<Basket />} />
+      </Routes>
+    </Router>
   )
 }
 

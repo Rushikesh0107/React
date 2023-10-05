@@ -1,42 +1,30 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {increamentAmount, decreamentAmount} from '../features/BasketSlice'
+import {useSelector} from 'react-redux'
 
-function Product({name, price, image, amount}) {
+function Product({name, image, price, amount}) {
 
-  const dispatch = useDispatch();
-  
+    const dispatch = useDispatch();
+    
   return (
-    <div className='flex flex-row w-4/5 justify-around shadow-xl rounded-2xl p-2 bg-white'>
-
-        <img src={image} alt="glass image" className=' overflow-hidden rounded-2xl w-60'/>
-
-    <div className='w-full flex flex-col  ml-10 justify-center'>
-
-        <p className='font-bold text-xl'>{name}</p>
-
-        <p className=''> Price: {price}$</p>
-
-        <button className='w-10 text-red-800 mt-2 font-semibold transition-all active:scale-75'>Remove</button>
-
-    </div>
-
-    <div className='w-full flex flex-col items-center justify-center'>
-
-        <p>Amount:</p>
-
-        <button 
-        className='transition-all active:scale-75 bg-green-700 px-1 rounded-lg text-white font-bold'
-        onClick={() => {dispatch(increamentAmount({name}))}} 
-        >+</button>
-
-        <p>{amount}</p>
-
-        <button 
-        className='transition-all active:scale-75 bg-red-700 px-1 rounded-lg text-white font-bold'
-        onClick={() => {dispatch(decreamentAmount({name}))}}
-        >-</button>
-
+    <div className='flex w-[60%] mb-5 mx-auto border  justify-between px-10 items-center rounded-lg'>
+        <div className=''>
+            <img src={image} alt="glasses image" className='w-full rounded-lg h-24' />
+        </div>
+        <div className=''>
+            <p className='text-xl'>{name}</p>
+            <p>{price}$</p>
+        </div>
+        <div className='flex flex-col '>
+            <p>Amount :</p>
+            <button
+            onClick={()=> dispatch(increamentAmount(name))}
+            >+</button>
+            <p className='text-center'>{amount}</p>
+            <button
+            onClick={()=>dispatch(decreamentAmount(name))}
+            >-</button>
         </div>
     </div>
   )
