@@ -5,6 +5,7 @@ import Product from '../components/Product'
 
 function Basket() {
   const items = useSelector(state => state.basket.basketVal)
+  console.log(items);
 
   const total = useSelector(state => state.basket.total)
   return (

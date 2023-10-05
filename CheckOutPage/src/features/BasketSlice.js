@@ -15,6 +15,7 @@ const basketSlice = createSlice({
     reducers: {
         increamentAmount: (state, action) => {
             const item = state.products.find(item => item.name === action.payload);
+            item.amount++;
         },
 
         decreamentAmount: (state, action) => {

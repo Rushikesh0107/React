@@ -1,32 +1,32 @@
 export const storeData = [
     {
-        name: "Goofy aa Glasses",
+        name: "Glasses 1",
         price: 123.54,
-        image: "https://rlv.zcache.com/goofy_eyeball_glasses-rb3b3bab8c2a0436da0f13c60568c25aa_zzxh4_200.jpg?rlvnet=1",
+        image: "https://cdn.eyemyeye.com/shared/images/products/E12A13909/E12A13909-2.jpg",
         amount: 1
     },
     {
-        name: "Spooky Glasses",
+        name: "Glasses 2",
         price: 123.54,
-        image: "https://rlv.zcache.com/goofy_eyeball_glasses-rb3b3bab8c2a0436da0f13c60568c25aa_zzxh4_200.jpg?rlvnet=1",
+        image: "https://cdn.eyemyeye.com/shared/images/products/E12A13909/E12A13909-2.jpg",
         amount: 1
     },
     {
-        name: "Cringy Glasses",
+        name: "Glasses 3",
         price: 123.54,
-        image: "https://rlv.zcache.com/goofy_eyeball_glasses-rb3b3bab8c2a0436da0f13c60568c25aa_zzxh4_200.jpg?rlvnet=1",
+        image: "https://cdn.eyemyeye.com/shared/images/products/E12A13909/E12A13909-2.jpg",
         amount: 1
     },
     {
-        name: "Crazy Glasses",
+        name: "Glasses 4",
         price: 123.54,
-        image: "https://rlv.zcache.com/goofy_eyeball_glasses-rb3b3bab8c2a0436da0f13c60568c25aa_zzxh4_200.jpg?rlvnet=1",
+        image: "https://cdn.eyemyeye.com/shared/images/products/E12A13909/E12A13909-2.jpg",
         amount: 1
     },
     {
-        name: "Dammn Glasses",
+        name: "Glasses 5",
         price: 123.54,
-        image: "https://rlv.zcache.com/goofy_eyeball_glasses-rb3b3bab8c2a0436da0f13c60568c25aa_zzxh4_200.jpg?rlvnet=1",
+        image: "https://cdn.eyemyeye.com/shared/images/products/E12A13909/E12A13909-2.jpg",
         amount: 1
     }
 ]
