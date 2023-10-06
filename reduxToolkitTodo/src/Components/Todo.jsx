@@ -1,29 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {removeTodo} from '../Features/todo/todoSlice'
 import {updateTodo} from '../Features/todo/todoSlice'
 
-function Todo() {
+function Todo({todo}) {
 
-    const todos = useSelector(state => state.todos)
+    const [isTodoEditable, setIsTodoEditable] = useState(false)
+    const [todoMsg, setTodoMsg] = useState('')
     const dispatch = useDispatch()
 
     return (
         <>
-        <div>Todos</div>
         <ul className="list-none">
-            {todos.map((todo) => (
-              <li
-                className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
-                key={todo.id}
-              >
-                <div className='text-white w-9/12'>{todo.text}</div>
+            <li className='flex justify-between border p-4 w-1/2 rounded-lg mb-5 mx-auto border-gray-900'>
 
+            <input
+            type ="text"
+            className={'border-none text-xl font-bold text-white outline-none bg-transparent rounded-lg ${isTodoEditable ? "border-gray-500/10 px-2" : "border-transparent"}'}
+            value = {(isTodoEditable ? todoMsg : todo.text)}
+            onChange={(e) => setTodoMsg(e.target.value)}
+            readOnly={!isTodoEditable}
+            />
+
+                <div className='flex gap-5'>
                 <button 
                 className='text-white bg-green-500 py-1 rounded-lg px-2 font-bold'
-                onClick={()=> dispatch(updateTodo(todo.id))}
+                onClick={()=> {
+                  if(isTodoEditable){
+                    dispatch(updateTodo({id: todo.id, text: todoMsg}))
+                    setTodoMsg("")
+                    setIsTodoEditable((prev)=>!prev)
+                  }else setIsTodoEditable((prev) => !prev)
+                 }
+                }
                 >
-                  Update
+                  {isTodoEditable ? "Save" : "Update"}
                 </button>
 
                 <button
@@ -45,8 +56,8 @@ function Todo() {
                     />
                   </svg>
                 </button>
+                </div>
               </li>
-            ))}
           </ul>
         </>
       )
