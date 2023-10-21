@@ -2,14 +2,18 @@ import React from 'react'
 import {useQuery} from '@tanstack/react-query'
 import fetchPet from './fetchPet'
 import {useParams} from 'react-router-dom'
+import {useState } from 'react'
+import Modal from './Modal'
+import './Modal.css'
 
 function Details() {
 
+  const [showModal, setShowModal] = useState(false);
   const {id} = useParams();
   const result = useQuery(['details', id], fetchPet);
 
   if(result.isLoading) {
-    return <h1>Loading...</h1>
+    return <div className=''><h1 className='text-center text-5xl font-bold mt-40'>Loading...</h1></div>
   }
 
   if(result.isError) {
@@ -44,8 +48,30 @@ function Details() {
       </div>
 
       <div className='flex justify-center'>
-        <button className='bg-black text-red-200 p-2 rounded-lg w-1/2 font-bold active:scale-75 transition-all'>Adopt {pet.name}</button>
+        <button className='bg-black text-red-200 p-2 rounded-lg w-1/2 font-bold active:scale-75 transition-all'
+        onClick={() => {
+          setShowModal(true);
+          disableBodyScroll(document.querySelector('#root'));
+        }}
+        >Adopt {pet.name}</button>
       </div>
+
+      {
+        showModal ? (
+          <Modal>
+            <div className='pop-div'>
+              <h1>Would you like to Adopte {pet.name}?</h1>
+              <div className='yes-no'>
+                <button className='bg-green-500 py-1 px-2 rounded font-bold text-white active:scale-75'>Yes</button>
+                <button
+                onClick={() => setShowModal(false)}
+                className='bg-red-500 py-1 px-2 rounded font-bold text-white active:scale-75'
+                >No</button>
+              </div>
+            </div>
+          </Modal>
+        ) : null
+      }
       </div>
     </div>
     </>

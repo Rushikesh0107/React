@@ -4,6 +4,7 @@ import SearchParams from './SearchParams'
 import {Link, BrowserRouter, Routes, Route} from 'react-router-dom'
 import Details from './Details'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import './index.css'
 
 const queryClient = new QueryClient({
   defaultOptions: {

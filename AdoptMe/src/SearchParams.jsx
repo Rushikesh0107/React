@@ -1,31 +1,23 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Results from './Results'
 import useBreedList from './useBreedList'
+import { useQuery } from '@tanstack/react-query'
+import fetchSearch from './fetchSearch'
 
 function SearchParams() {
-    const [location, setLocation] = useState('')
+
+    const [requestParamas, setRequestParams] = useState({
+        location: "",
+        animal: "",
+        breed: "",  
+    })
     const [animals, setAnimals] = useState('')
-    const [breed, setBreed] = useState('')
     const [breeds] = useBreedList(animals)
-    const [pets, setPets] = useState([]);
 
-    useEffect(() => {
-        requestPets();
-    }, [])
+    const result = useQuery(['search', requestParamas], fetchSearch)
+    const pets = result?.data?.pets ?? [];
 
-    async function requestPets() {
-        const response = await axios.get(`http://pets-v2.dev-apis.com/pets?animal=${animals}&location=${location}&breed=${breed}`)
-        
-        setPets(response.data.pets);
-        // console.log(response.data);
-    }
-
-    function handleFormSubmit(e) {
-        e.preventDefault();
-        requestPets();
-    }
 
 
   return (
@@ -35,7 +27,18 @@ function SearchParams() {
         <div className='flex mt-10 justify-evenly'>
         <div className='flex justify-around h-[22rem] mt-10 ml-5'>
             <form className='flex flex-col bg-red-300  p-5 gap-3 rounded-lg w-80' 
-            onSubmit={e => {handleFormSubmit(e)}}
+            onSubmit={e => {
+                e.preventDefault()
+                const formData = new FormData(e.target)
+                const obj = {
+                    animal: formData.get('animal') ?? "",
+                    breed: formData.get('breed') ?? "",
+                    location: formData.get('location') ?? "",
+                    }
+                setRequestParams(obj)
+                }
+
+            }    
             >
             
                 <label htmlFor="location" className='text-lg font-semibold'>
@@ -43,8 +46,7 @@ function SearchParams() {
                     <div>
                     <input id="location" placeholder="Location" 
                     className='p-2 border-2 border-black rounded-lg w-full'
-                    value={location}
-                    onChange={e => setLocation(e.target.value)}
+                    name='location'
                     />
                     </div>
                 </label>
@@ -56,7 +58,6 @@ function SearchParams() {
                     value={animals}
                     onChange={(e) => {
                         setAnimals(e.target.value);
-                        setBreed(' ');
                         }
                     }
                     >
@@ -74,9 +75,8 @@ function SearchParams() {
                     Breed :
                     <div>
                     <select id="breed" className='p-2 border-2 border-black rounded-lg w-full'
-                    disabled={breed.length === 0}
-                    value={breed}
-                    onChange={e => setBreed(e.target.value)}
+                    disabled={breeds.length === 0}
+                    name='breed'
                     >
                         <option>Select</option>
                         {
